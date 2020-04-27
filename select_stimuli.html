@@ -1,0 +1,80 @@
+<script>
+
+	function shuffleArray(array) {
+    	for (var i = array.length - 1; i > 0; i--) {
+        	var j = Math.floor(Math.random() * (i + 1));
+        	var temp = array[i];
+        	array[i] = array[j];
+        	array[j] = temp;
+    	}
+	}
+
+function randomSample(items, n=1) {
+	shuffleArray(items);
+	return(items.slice(0,n))
+	}
+
+var set1 = ['hens','member','emily','mental'];
+var set2 = ['sense','ken','zen','gelpen'];
+var set3 = ['hint','grin','minutes','twin'];
+var set4 = ['mint','windy','reaganpin','gym'];
+var set5 = ['pen','jen'];
+var fillers = ['where','france','florida','cats','rabbits','neighbor','tall','time','lettuce','umbrella','history','coffee']
+
+// Select 2 from each set
+var items1 = [];
+var items2 = [];
+items1 = items1.concat(randomSample(set1, 2));
+items1 = items1.concat(randomSample(set2, 2));
+items2 = items2.concat(randomSample(set3, 2));
+items2 = items2.concat(randomSample(set4, 2));
+
+// Assign one to each speaker
+speaker_order1 = ['antonio','daniel','evan','jordan'];
+speaker_order2 = ['antonio','daniel','evan','jordan'];
+shuffleArray(speaker_order1);
+shuffleArray(speaker_order2);
+speaker_order = speaker_order1.concat(speaker_order2);
+block1_items = items1.concat(items2);
+
+block1 = []
+for (i=0; i < 8; i++) {
+	block1.push(speaker_order[i] + '_' + block1_items[i]);
+	}
+
+
+block2 = []
+
+// Assign e or i, original or spliced
+var vowels = ['e', 'i'];
+var spliced = ['', '_spliced'];
+for (i=0; i < 8; i++) {
+	shuffleArray(vowels);
+	shuffleArray(spliced);
+	block2[i] = block1[i] + '_' + vowels[1] + spliced[1] + '.wav';
+	block1[i] = block1[i] + '_' + vowels[0] + spliced[0] + '.wav';
+	}
+
+// Add fillers
+filler_speakers = ['antonio','daniel','evan','jordan','willy','keeta'];
+filler_speakers2 = ['antonio','daniel','evan','jordan','willy','keeta'];
+shuffleArray(filler_speakers);
+shuffleArray(filler_speakers2);
+block1_fillers = randomSample(fillers, 6);
+block2_fillers = randomSample(fillers, 6);
+
+for (i=0; i < 6; i++) {
+	block1[i+8] = filler_speakers[i] + '_filler_' + block1_fillers[i] + '.wav'
+	block2[i+8] = filler_speakers2[i] + '_filler_' + block2_fillers[i] + '.wav'
+	}
+
+shuffleArray(block1)
+shuffleArray(block2)
+
+stimuli = block1.concat(block2);
+
+// LATER: don't forget to add pen/pin/jen/gin
+
+
+</script>
+

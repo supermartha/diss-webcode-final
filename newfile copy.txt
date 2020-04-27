@@ -1,0 +1,1 @@
+cat,bat:nopen,sin:nodog,frog:no
